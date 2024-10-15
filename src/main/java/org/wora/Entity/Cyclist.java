@@ -21,12 +21,16 @@ public class Cyclist {
     private String lastName;
     private LocalDate dateOfBirth;
     private String nationality;
-    private String team;
+
 
     @OneToMany(mappedBy = "cyclist", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<StageResult> stageResults = new HashSet<>();
 
     @OneToMany(mappedBy = "cyclist", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<GeneralResult> generalResults = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
+
 }
 
