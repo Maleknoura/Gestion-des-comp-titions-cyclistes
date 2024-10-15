@@ -18,6 +18,6 @@ public class CyclistServiceImpl implements CyclistService {
 
     @Override
     public Cyclist save(Cyclist cyclist) {
-        return null;
+        return cyclistRepository.save(cyclist);
     }
 }
