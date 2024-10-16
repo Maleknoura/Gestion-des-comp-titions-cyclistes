@@ -1,19 +1,27 @@
 package org.wora.service.impl;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.wora.Entity.Cyclist;
 import org.wora.Entity.Team;
 import org.wora.repository.CyclistRepository;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class CyclistServiceImplTest {
 
     @InjectMocks
@@ -22,22 +30,13 @@ class CyclistServiceImplTest {
     @Mock
     private CyclistRepository cyclistRepository;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
-
     @Test
-    void testSaveCyclist() {
+    @DisplayName("Should return saved cyclist when given valid data")
+    void save_ShouldReturnCreatedCyclist_WhenGivenValidData() {
         Team team = new Team();
         team.setName("Team A");
 
-        Cyclist cyclist = new Cyclist();
-        cyclist.setFirstName("Noura");
-        cyclist.setLastName("Malek");
-        cyclist.setDateOfBirth(LocalDate.of(2002, 10, 15));
-        cyclist.setNationality("Moroccan");
-        cyclist.setTeam(team);
+        Cyclist cyclist = new Cyclist("Noura","Malek",LocalDate.of(2002,10,15),"moroccan",team);
 
         when(cyclistRepository.save(any(Cyclist.class))).thenReturn(cyclist);
 
@@ -47,11 +46,22 @@ class CyclistServiceImplTest {
         assertEquals("Noura", savedCyclist.getFirstName());
         assertEquals("Malek", savedCyclist.getLastName());
         assertEquals(LocalDate.of(2002, 10, 15), savedCyclist.getDateOfBirth());
-        assertEquals("Moroccan", savedCyclist.getNationality());
+        assertEquals("moroccan", savedCyclist.getNationality());
         assertNotNull(savedCyclist.getTeam());
         assertEquals("Team A", savedCyclist.getTeam().getName());
         verify(cyclistRepository, times(1)).save(cyclist);
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
