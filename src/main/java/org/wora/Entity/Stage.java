@@ -2,6 +2,7 @@ package org.wora.Entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.wora.Entity.embeddebals.StageResult;
 
@@ -10,6 +11,7 @@ import java.util.*;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class Stage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +27,10 @@ public class Stage {
 
     @OneToMany(mappedBy = "stage", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<StageResult> results = new HashSet<>();
+
+    public Stage(String firstStage, double v, LocalDate of) {
+        this.name=name;
+        this.distance=distance;
+        this.date=date;
+    }
 }

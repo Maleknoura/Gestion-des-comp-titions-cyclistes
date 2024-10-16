@@ -20,10 +20,10 @@ public class AppConfig {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:mem:Competitions_Cyclistes");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("administrateur");
+        dataSource.setDriverClassName("org.postgresql.Driver"); // PostgreSQL Driver
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/Competitions_Cyclistes"); // Change to your database name
+        dataSource.setUsername("postgres"); // Change to your PostgreSQL username
+        dataSource.setPassword("administrateur"); // Change to your PostgreSQL password
         return dataSource;
     }
 
@@ -38,8 +38,8 @@ public class AppConfig {
         factory.setDataSource(dataSource());
 
         Properties properties = new Properties();
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect"); // PostgreSQL dialect
+        properties.setProperty("hibernate.hbm2ddl.auto", "update"); // Automatically creates/updates tables
         factory.setJpaProperties(properties);
         return factory;
     }
@@ -51,4 +51,3 @@ public class AppConfig {
         return txManager;
     }
 }
-
