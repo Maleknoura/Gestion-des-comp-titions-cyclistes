@@ -6,12 +6,12 @@ import org.wora.Entity.Competition;
 import org.wora.Entity.Cyclist;
 import org.wora.Entity.Stage;
 import org.wora.Entity.Team;
+import org.wora.Entity.embeddebals.GeneralResult;
+import org.wora.Entity.embeddebals.GeneralResultId;
 import org.wora.Entity.embeddebals.StageResult;
 import org.wora.config.AppConfig;
-import org.wora.repository.CompetitionRepository;
-import org.wora.repository.CyclistRepository;
-import org.wora.repository.StageRepository;
-import org.wora.repository.TeamRepository;
+import org.wora.repository.*;
+import org.wora.service.GeneralResultService;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -19,11 +19,14 @@ import java.util.Optional;
 public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        GeneralResultService generalResultService = context.getBean(GeneralResultService.class);
+
 
         CompetitionRepository competitionRepository = context.getBean(CompetitionRepository.class);
         StageRepository stageRepository = context.getBean(StageRepository.class);
         CyclistRepository cyclistRepository = context.getBean(CyclistRepository.class);
         TeamRepository teamRepository = context.getBean(TeamRepository.class);
+        GeneralResultRepository generalResultRepository = context.getBean(GeneralResultRepository.class);
 
         Competition competition = new Competition();
         competition.setName("Tour de France");
@@ -48,19 +51,26 @@ public class Main {
         cyclist.setLastName("Doe");
         cyclist.setDateOfBirth(LocalDate.of(1990, 7, 1));
         cyclist.setNationality("French");
-
-        team.setId(1L);
         cyclist.setTeam(team);
-
-
         cyclistRepository.save(cyclist);
 
-//        StageResult stageResult = new StageResult();
-//        stageResult.setCyclist(cyclist);
-//        stageResult.setStage(stage);
-//        stageResult.setDetails(120.5);
-//        stageRepository.save(stageResult);
+        try {
+            GeneralResult result = generalResultService.save(cyclist.getId(), competition.getId());
+            System.out.println("GeneralResult sauvegardé avec succès. ID: " + result.getId());
+        } catch (RuntimeException e) {
+            System.out.println("Erreur lors de la sauvegarde du GeneralResult: " + e.getMessage());
+        }
 
-        System.out.println("Entities saved to the database!");
+        GeneralResult savedResult = generalResultRepository.findById(new GeneralResultId(cyclist.getId(), competition.getId())).orElse(null);
+        if (savedResult != null) {
+            System.out.println("GeneralResult trouvé dans la base de données.");
+            System.out.println("Cycliste: " + savedResult.getCyclist().getFirstName());
+            System.out.println("Compétition: " + savedResult.getCompetition().getName());
+        } else {
+            System.out.println("GeneralResult non trouvé dans la base de données.");
+        }
+
+
+        System.out.println("Entities saved to the database and cyclist registered to competition!");
     }
 }

@@ -25,4 +25,5 @@ public class GeneralResult {
     private Competition competition;
 
     private Duration generalTime;
-    private Integer generalRank;}
+    private Integer generalRank;
+}

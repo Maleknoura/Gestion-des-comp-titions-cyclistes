@@ -2,6 +2,7 @@ package org.wora.config;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -9,21 +10,24 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories(basePackages = "org.wora.repository")
+@EnableTransactionManagement
+@ComponentScan(basePackages = {"org.wora.service", "org.wora.repository"})
 public class AppConfig {
 
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver"); // PostgreSQL Driver
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/Competitions_Cyclistes"); // Change to your database name
-        dataSource.setUsername("postgres"); // Change to your PostgreSQL username
-        dataSource.setPassword("administrateur"); // Change to your PostgreSQL password
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/Competitions_Cyclistes");
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("administrateur");
         return dataSource;
     }
 
@@ -38,8 +42,8 @@ public class AppConfig {
         factory.setDataSource(dataSource());
 
         Properties properties = new Properties();
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect"); // PostgreSQL dialect
-        properties.setProperty("hibernate.hbm2ddl.auto", "update"); // Automatically creates/updates tables
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
         factory.setJpaProperties(properties);
         return factory;
     }
