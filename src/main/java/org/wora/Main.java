@@ -8,9 +8,12 @@ import org.wora.Entity.Stage;
 import org.wora.Entity.Team;
 import org.wora.Entity.embeddebals.GeneralResult;
 import org.wora.Entity.embeddebals.GeneralResultId;
-import org.wora.Entity.embeddebals.StageResult;
 import org.wora.config.AppConfig;
-import org.wora.repository.*;
+import org.wora.repository.CompetitionRepository;
+import org.wora.repository.CyclistRepository;
+import org.wora.repository.GeneralResultRepository;
+import org.wora.repository.StageRepository;
+import org.wora.repository.TeamRepository;
 import org.wora.service.GeneralResultService;
 
 import java.time.LocalDate;
@@ -20,7 +23,6 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         GeneralResultService generalResultService = context.getBean(GeneralResultService.class);
-
 
         CompetitionRepository competitionRepository = context.getBean(CompetitionRepository.class);
         StageRepository stageRepository = context.getBean(StageRepository.class);
@@ -70,6 +72,14 @@ public class Main {
             System.out.println("GeneralResult non trouvé dans la base de données.");
         }
 
+        try {
+            long cyclistId = 5;
+            long competitionId = 9;
+            generalResultService.removeCyclistFromCompetition(cyclistId, competitionId);
+            System.out.println("Cycliste supprimé de la compétition avec succès.");
+        } catch (RuntimeException e) {
+            System.out.println("Erreur lors de la suppression du cycliste de la compétition: " + e.getMessage());
+        }
 
         System.out.println("Entities saved to the database and cyclist registered to competition!");
     }

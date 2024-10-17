@@ -55,4 +55,5 @@ public class GeneralResultServiceImpl implements GeneralResultService {
             throw new RuntimeException("Registration not found for this cyclist and competition");
         }
     }
+
 }
