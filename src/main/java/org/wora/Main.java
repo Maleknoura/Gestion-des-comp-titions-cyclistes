@@ -6,7 +6,7 @@ import org.wora.Entity.Competition;
 import org.wora.Entity.Cyclist;
 import org.wora.Entity.Stage;
 import org.wora.Entity.Team;
-import org.wora.Entity.embeddebals.GeneralResult;
+import org.wora.Entity.GeneralResult;
 import org.wora.Entity.embeddebals.GeneralResultId;
 import org.wora.config.AppConfig;
 import org.wora.repository.CompetitionRepository;
@@ -14,10 +14,10 @@ import org.wora.repository.CyclistRepository;
 import org.wora.repository.GeneralResultRepository;
 import org.wora.repository.StageRepository;
 import org.wora.repository.TeamRepository;
-import org.wora.service.GeneralResultService;
+import org.wora.service.Api.GeneralResultService;
 
 import java.time.LocalDate;
-import java.util.Optional;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -72,14 +72,23 @@ public class Main {
             System.out.println("GeneralResult non trouvé dans la base de données.");
         }
 
-        try {
-            long cyclistId = 5;
-            long competitionId = 9;
-            generalResultService.removeCyclistFromCompetition(cyclistId, competitionId);
-            System.out.println("Cycliste supprimé de la compétition avec succès.");
-        } catch (RuntimeException e) {
-            System.out.println("Erreur lors de la suppression du cycliste de la compétition: " + e.getMessage());
+        if (competition != null) {
+            List<GeneralResult> registrations = generalResultRepository.findByCompetition(competition);
+            System.out.println("Cyclistes inscrits à la compétition " + competition.getName() + ":");
+            for (GeneralResult registration : registrations) {
+                System.out.println("Nom: " + registration.getCyclist().getFirstName() + " " + registration.getCyclist().getLastName());
+            }
+        } else {
+            System.out.println("Compétition non trouvée.");
         }
+//        try {
+//            long cyclistId = 5;
+//            long competitionId = 9;
+//            generalResultService.removeCyclistFromCompetition(cyclistId, competitionId);
+//            System.out.println("Cycliste supprimé de la compétition avec succès.");
+//        } catch (RuntimeException e) {
+//            System.out.println("Erreur lors de la suppression du cycliste de la compétition: " + e.getMessage());
+//        }
 
         System.out.println("Entities saved to the database and cyclist registered to competition!");
     }

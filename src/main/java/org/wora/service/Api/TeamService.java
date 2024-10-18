@@ -1,4 +1,4 @@
-package org.wora.service;
+package org.wora.service.Api;
 
 import org.wora.Entity.Team;
 import java.util.List;

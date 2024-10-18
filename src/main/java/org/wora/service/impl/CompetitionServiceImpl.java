@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wora.Entity.Competition;
 import org.wora.repository.CompetitionRepository;
-import org.wora.service.CompetitionService;
+import org.wora.service.Api.CompetitionService;
 
 import java.time.LocalDate;
 import java.util.List;

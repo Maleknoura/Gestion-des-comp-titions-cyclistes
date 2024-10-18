@@ -1,13 +1,9 @@
-package org.wora.Entity.embeddebals;
+package org.wora.Entity;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.wora.Entity.Competition;
-import org.wora.Entity.Cyclist;
+import org.wora.Entity.embeddebals.GeneralResultId;
 
 import java.time.Duration;
 @Getter
@@ -16,11 +12,14 @@ import java.time.Duration;
 public class GeneralResult {
     @EmbeddedId
     private GeneralResultId id;
+
     @ManyToOne
+    @MapsId("cyclistId")
     @JoinColumn(name = "cyclist_id")
     private Cyclist cyclist;
 
     @ManyToOne
+    @MapsId("competitionId")
     @JoinColumn(name = "competition_id")
     private Competition competition;
 

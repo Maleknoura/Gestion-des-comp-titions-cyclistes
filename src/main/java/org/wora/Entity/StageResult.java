@@ -1,10 +1,11 @@
-package org.wora.Entity.embeddebals;
+package org.wora.Entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.wora.Entity.Cyclist;
-import org.wora.Entity.Stage;
+import org.wora.Entity.embeddebals.StageResultId;
+
+import java.time.Duration;
 
 @Entity
 @Getter
@@ -23,6 +24,6 @@ public class StageResult {
     @JoinColumn(name = "stage_id")
     private Stage stage;
 
-    @Embedded
-    private StageResultDetails details;
+    private Duration time;
+    private Integer rank;
 }

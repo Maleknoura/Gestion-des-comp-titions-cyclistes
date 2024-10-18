@@ -2,10 +2,9 @@ package org.wora.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.wora.Entity.Competition;
 import org.wora.Entity.Stage;
 import org.wora.repository.StageRepository;
-import org.wora.service.StageService;
+import org.wora.service.Api.StageService;
 
 import java.util.List;
 import java.util.Optional;

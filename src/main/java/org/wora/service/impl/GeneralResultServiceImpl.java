@@ -5,14 +5,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.wora.Entity.Competition;
 import org.wora.Entity.Cyclist;
-import org.wora.Entity.embeddebals.GeneralResult;
+import org.wora.Entity.GeneralResult;
 import org.wora.Entity.embeddebals.GeneralResultId;
 import org.wora.repository.CompetitionRepository;
 import org.wora.repository.CyclistRepository;
 import org.wora.repository.GeneralResultRepository;
-import org.wora.service.CompetitionService;
-import org.wora.service.GeneralResultService;
+import org.wora.service.Api.CompetitionService;
+import org.wora.service.Api.GeneralResultService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,6 +55,11 @@ public class GeneralResultServiceImpl implements GeneralResultService {
         else {
             throw new RuntimeException("Registration not found for this cyclist and competition");
         }
+    }
+
+    @Override
+    public List<GeneralResult> findByCompetition(Competition competition) {
+        return generalResultRepository.findByCompetition(competition);
     }
 
 }

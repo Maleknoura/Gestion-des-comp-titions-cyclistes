@@ -11,8 +11,8 @@ import java.io.Serializable;
 @Embeddable
 @NoArgsConstructor
 public class GeneralResultId implements Serializable {
-    private Long cyclistId;
     private Long competitionId;
+    private Long cyclistId;
     public GeneralResultId(long cyclistId,long competitionId){
         this.cyclistId=cyclistId;
         this.competitionId=competitionId;

@@ -3,9 +3,10 @@ package org.wora.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.wora.Entity.Competition;
 import org.wora.Entity.Cyclist;
 import org.wora.repository.CyclistRepository;
-import org.wora.service.CyclistService;
+import org.wora.service.Api.CyclistService;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,4 +37,9 @@ public class CyclistServiceImpl implements CyclistService {
     public Cyclist update(Cyclist cyclist) {
         return cyclistRepository.save(cyclist);
     }
+
+//    @Override
+//    public List<Cyclist> findCyclistByCompetition(Competition competition) {
+//        return cyclistRepository.findCyclistsByCompetition(competition);
+//    }
 }

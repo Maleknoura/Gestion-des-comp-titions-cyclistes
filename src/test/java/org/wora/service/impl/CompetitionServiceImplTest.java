@@ -1,7 +1,5 @@
 package org.wora.service.impl;
 
-import org.checkerframework.checker.units.qual.C;
-import org.hibernate.mapping.Any;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,8 +10,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.wora.Entity.Competition;
 import org.wora.repository.CompetitionRepository;
-import org.wora.repository.CyclistRepository;
-import org.wora.service.CompetitionService;
 
 import java.time.LocalDate;
 

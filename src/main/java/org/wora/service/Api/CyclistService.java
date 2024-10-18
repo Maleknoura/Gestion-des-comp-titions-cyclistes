@@ -1,5 +1,6 @@
-package org.wora.service;
+package org.wora.service.Api;
 
+import org.wora.Entity.Competition;
 import org.wora.Entity.Cyclist;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface CyclistService {
     List<Cyclist> findall();
     Optional<Cyclist> findbyId(long id);
     Cyclist update(Cyclist cyclist);
+//    List<Cyclist>findCyclistByCompetition(Competition competition);
 }

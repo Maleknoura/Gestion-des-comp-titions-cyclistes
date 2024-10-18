@@ -7,8 +7,6 @@ import jakarta.validation.constraints.Past;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.wora.Entity.embeddebals.GeneralResult;
-import org.wora.Entity.embeddebals.StageResult;
 
 import java.time.LocalDate;
 import java.util.HashSet;

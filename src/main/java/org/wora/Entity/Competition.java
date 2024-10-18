@@ -1,11 +1,9 @@
 package org.wora.Entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.wora.Entity.embeddebals.GeneralResult;
 
 import java.time.LocalDate;
 import java.util.HashSet;

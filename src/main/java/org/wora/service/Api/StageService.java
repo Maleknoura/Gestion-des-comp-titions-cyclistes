@@ -1,6 +1,5 @@
-package org.wora.service;
+package org.wora.service.Api;
 
-import org.wora.Entity.Competition;
 import org.wora.Entity.Stage;
 
 import java.util.List;
