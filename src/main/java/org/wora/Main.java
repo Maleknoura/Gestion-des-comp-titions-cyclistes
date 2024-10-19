@@ -3,36 +3,55 @@ package org.wora;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.wora.Entity.*;
-import org.wora.Entity.embeddebals.GeneralResultId;
 import org.wora.config.AppConfig;
-import org.wora.repository.CompetitionRepository;
-import org.wora.repository.CyclistRepository;
-import org.wora.repository.GeneralResultRepository;
-import org.wora.repository.StageRepository;
-import org.wora.service.Api.GeneralResultService;
+import org.wora.repository.StageResultRepository;
+import org.wora.service.Api.CompetitionService;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        GeneralResultService generalResultService = context.getBean(GeneralResultService.class);
+        CompetitionService competitionService = context.getBean(CompetitionService.class);
+        StageResultRepository stageResultRepository = context.getBean(StageResultRepository.class);
 
-        List<GeneralResult> results = generalResultService.findByCompetitionIdOrderByGeneralRankAsc(9L);
+        Long competitionId = 9L;
+        Optional<Competition> competitionOpt = competitionService.findById(competitionId);
 
-        if (!results.isEmpty()) {
-            Competition competition = results.get(0).getCompetition();
+        if (competitionOpt.isPresent()) {
+            Competition competition = competitionOpt.get();
             System.out.println("Competition: " + competition.getName());
+            System.out.println("Location: " + competition.getLocation());
+            System.out.println("Rankings:");
+
+            List<GeneralResult> results = competitionService.findCyclistRankings(competitionId);
 
             for (GeneralResult result : results) {
-                System.out.println("Cyclist: " + result.getCyclist().getFirstName() + ", Rank: " + result.getGeneralRank());
+                String formattedTime = formatDuration(result.getGeneralTime());
+                System.out.println("Cyclist: " + result.getCyclist().getFirstName() + " " + result.getCyclist().getLastName() +
+                        ", Rank: " + result.getGeneralRank() + ", General Time: " + formattedTime);
+
+                List<StageResult> stageResults = stageResultRepository.findByCyclistIdAndStageCompetitionId(result.getCyclist().getId(), competitionId);
+                for (StageResult stageResult : stageResults) {
+                    System.out.println("  Stage: " + stageResult.getStage().getName() +
+                            ", Location: " + competition.getLocation() +
+                            ", Time: " + formatDuration(stageResult.getTime()));
+                }
             }
         } else {
-            System.out.println("No results found for the given competition.");
+            System.out.println("Competition not found.");
         }
+    }
 
+    private static String formatDuration(Duration duration) {
+        long seconds = duration.getSeconds();
+        long hours = seconds / 3600;
+        seconds %= 3600;
+        long minutes = seconds / 60;
+        seconds %= 60;
+
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 }
-

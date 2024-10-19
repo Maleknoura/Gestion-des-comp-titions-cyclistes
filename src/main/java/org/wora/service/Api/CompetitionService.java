@@ -1,6 +1,7 @@
 package org.wora.service.Api;
 
 import org.wora.Entity.Competition;
+import org.wora.Entity.GeneralResult;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,5 +14,7 @@ public interface CompetitionService {
     Competition update(Competition competition);
     List<Competition> findByDateRange(LocalDate startDate, LocalDate endDate);
     List<Competition> findByLocation(String location);
+    List<GeneralResult> findCyclistRankings(Long competitionId);
+
 }
 

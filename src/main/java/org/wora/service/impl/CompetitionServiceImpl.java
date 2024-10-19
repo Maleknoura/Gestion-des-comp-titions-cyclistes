@@ -4,7 +4,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wora.Entity.Competition;
+import org.wora.Entity.GeneralResult;
 import org.wora.repository.CompetitionRepository;
+import org.wora.repository.GeneralResultRepository;
 import org.wora.service.Api.CompetitionService;
 
 import java.time.LocalDate;
@@ -15,9 +17,10 @@ import java.util.Optional;
 public class CompetitionServiceImpl implements CompetitionService {
     @Autowired
     private CompetitionRepository competitionRepository;
+    @Autowired
+    private GeneralResultRepository generalResultRepository;
 
-
-    public Competition save(@Valid Competition competition){
+    public Competition save(@Valid Competition competition) {
         return competitionRepository.save(competition);
     }
 
@@ -35,6 +38,7 @@ public class CompetitionServiceImpl implements CompetitionService {
     public Competition update(Competition competition) {
         return competitionRepository.save(competition);
     }
+
     @Override
     public List<Competition> findByDateRange(LocalDate startDate, LocalDate endDate) {
         return competitionRepository.findByStartDateBetween(startDate, endDate);
@@ -44,4 +48,10 @@ public class CompetitionServiceImpl implements CompetitionService {
     public List<Competition> findByLocation(String location) {
         return competitionRepository.findByLocation(location);
     }
+
+    @Override
+    public List<GeneralResult> findCyclistRankings(Long competitionId) {
+        return generalResultRepository.findByCompetitionIdOrderByGeneralRankAsc(competitionId);
+    }
 }
+
