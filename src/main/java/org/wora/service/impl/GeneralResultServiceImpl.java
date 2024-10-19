@@ -3,16 +3,14 @@ package org.wora.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.wora.Entity.Competition;
-import org.wora.Entity.Cyclist;
-import org.wora.Entity.GeneralResult;
+import org.wora.Entity.*;
 import org.wora.Entity.embeddebals.GeneralResultId;
-import org.wora.repository.CompetitionRepository;
-import org.wora.repository.CyclistRepository;
-import org.wora.repository.GeneralResultRepository;
+import org.wora.Entity.embeddebals.StageResultId;
+import org.wora.repository.*;
 import org.wora.service.Api.CompetitionService;
 import org.wora.service.Api.GeneralResultService;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,23 +24,23 @@ public class GeneralResultServiceImpl implements GeneralResultService {
     private CompetitionService competitionService;
     @Autowired
     private CompetitionRepository competitionRepository;
+    @Autowired
+    private StageRepository stageRepository;
+    @Autowired
+    private StageResultRepository stageResultRepository;
 
     @Transactional
     @Override
-    public GeneralResult save(long cyclistId, long competitionId) {
-        Optional<Cyclist> cyclist=cyclistRepository.findById(cyclistId);
-        Optional<Competition> competition=competitionRepository.findById(competitionId);
-        if(cyclist.isPresent()&&competition.isPresent()){
-            GeneralResultId generalResultId= new GeneralResultId(cyclistId,competitionId);
-            GeneralResult generalResult = new GeneralResult();
-            generalResult.setId(generalResultId);
-            generalResult.setCyclist(cyclist.get());
-            generalResult.setCompetition(competition.get());
-            return generalResultRepository.save(generalResult);
+    public StageResult save(long cyclistId, long stageId, Duration time, Integer rank) {
+        Cyclist cyclist = cyclistRepository.findById(cyclistId)
+                .orElseThrow(() -> new RuntimeException("Cyclist not found"));
+        Stage stage = stageRepository.findById(stageId)
+                .orElseThrow(() -> new RuntimeException("Stage not found"));
 
-        }else {
-            throw new RuntimeException("Invalid cyclist or competition ID");
-        }
+        StageResultId id = new StageResultId(cyclistId, stageId);
+        StageResult stageResult = new StageResult(id, cyclist, stage, time, rank);
+
+        return stageResultRepository.save(stageResult);
     }
 
     @Override
