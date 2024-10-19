@@ -10,7 +10,7 @@ import java.util.List;
 public interface GeneralResultService {
     StageResult save(long cyclistId, long stageId, Duration time, Integer rank);
     void removeCyclistFromCompetition(long cyclistId, long competitionId);
-    List<GeneralResult> findByCompetition(Competition competition);
+    List<GeneralResult> findByCompetitionIdOrderByGeneralRankAsc(Long competitionId);
 
 
 

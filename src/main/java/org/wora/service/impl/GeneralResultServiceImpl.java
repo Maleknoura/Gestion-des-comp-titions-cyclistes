@@ -45,19 +45,25 @@ public class GeneralResultServiceImpl implements GeneralResultService {
 
     @Override
     public void removeCyclistFromCompetition(long cyclistId, long competitionId) {
-        GeneralResultId generalResultId = new GeneralResultId(cyclistId,competitionId);
-        Optional<GeneralResult>generalResult=generalResultRepository.findById(generalResultId);
-        if(generalResult.isPresent()){
+        GeneralResultId generalResultId = new GeneralResultId(cyclistId, competitionId);
+        Optional<GeneralResult> generalResult = generalResultRepository.findById(generalResultId);
+        if (generalResult.isPresent()) {
             generalResultRepository.delete(generalResult.get());
-        }
-        else {
+        } else {
             throw new RuntimeException("Registration not found for this cyclist and competition");
         }
     }
 
+
+
+
     @Override
-    public List<GeneralResult> findByCompetition(Competition competition) {
-        return generalResultRepository.findByCompetition(competition);
+
+    public List<GeneralResult> findByCompetitionIdOrderByGeneralRankAsc(Long competitionId) {
+        return generalResultRepository.findByCompetitionIdOrderByGeneralRankAsc(competitionId);
     }
 
+
+
 }
+

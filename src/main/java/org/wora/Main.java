@@ -13,9 +13,26 @@ import org.wora.service.Api.GeneralResultService;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        GeneralResultService generalResultService = context.getBean(GeneralResultService.class);
+
+        List<GeneralResult> results = generalResultService.findByCompetitionIdOrderByGeneralRankAsc(9L);
+
+        if (!results.isEmpty()) {
+            Competition competition = results.get(0).getCompetition();
+            System.out.println("Competition: " + competition.getName());
+
+            for (GeneralResult result : results) {
+                System.out.println("Cyclist: " + result.getCyclist().getFirstName() + ", Rank: " + result.getGeneralRank());
+            }
+        } else {
+            System.out.println("No results found for the given competition.");
+        }
+
+    }
 }
-}
+
