@@ -1,22 +1,17 @@
     package org.wora.service.impl;
 
-    import jakarta.validation.ConstraintViolationException;
-    import org.junit.jupiter.api.BeforeEach;
-    import org.junit.jupiter.api.Disabled;
     import org.junit.jupiter.api.DisplayName;
     import org.junit.jupiter.api.Test;
     import org.junit.jupiter.api.extension.ExtendWith;
     import org.mockito.InjectMocks;
     import org.mockito.Mock;
     import org.mockito.junit.jupiter.MockitoExtension;
-    import org.wora.Entity.Cyclist;
-    import org.wora.Entity.Team;
-    import org.wora.repository.CyclistRepository;
+    import org.wora.cyclist.Cyclist;
+    import org.wora.team.Team;
+    import org.wora.cyclist.CyclistRepository;
+    import org.wora.cyclist.CyclistServiceImpl;
 
     import java.time.LocalDate;
-    import java.util.Arrays;
-    import java.util.List;
-    import java.util.Optional;
 
     import static org.junit.jupiter.api.Assertions.*;
     import static org.mockito.Mockito.*;

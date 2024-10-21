@@ -8,8 +8,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.wora.Entity.Competition;
-import org.wora.repository.CompetitionRepository;
+import org.wora.competition.Competition;
+import org.wora.competition.CompetitionRepository;
+import org.wora.competition.CompetitionServiceImpl;
 
 import java.time.LocalDate;
 
