@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.wora.competition.Competition;
-import org.wora.competition.CompetitionServiceImpl;
-import org.wora.competition.dto.CreateCompetitionDto;
+import org.wora.competition.dto.CompetitionRequestDto;
 
 @RestController
 @RequestMapping("/competitions")
@@ -17,7 +15,7 @@ public class CompetitionController {
     private CompetitionServiceImpl competitionService;
 
     @PostMapping
-    public ResponseEntity<Competition> createCompetition(@RequestBody CreateCompetitionDto createCompetitionDto) {
+    public ResponseEntity<Competition> createCompetition(@RequestBody CompetitionRequestDto createCompetitionDto) {
         Competition competition = new Competition(
                 createCompetitionDto.getName(),
                 createCompetitionDto.getStartDate(),
