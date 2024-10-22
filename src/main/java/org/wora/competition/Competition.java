@@ -13,8 +13,9 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity
+
 @NoArgsConstructor
+@Entity
 public class Competition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

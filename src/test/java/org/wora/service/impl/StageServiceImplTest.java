@@ -34,4 +34,5 @@ class StageServiceImplTest {
 //        assertEquals(600.00, savedStage.getDistance());
 //        assertEquals(LocalDate.of(2024, 12, 1), savedStage.getDate());
 //    }
+
 }
