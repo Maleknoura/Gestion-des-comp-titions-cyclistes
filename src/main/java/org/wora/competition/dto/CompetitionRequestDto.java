@@ -1,24 +1,25 @@
 package org.wora.competition.dto;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Set;
+import java.util.UUID;
+public record CompetitionRequestDto
+(
+        String name,
 
-@Getter
-@NoArgsConstructor
-public final class CompetitionRequestDto {
-    private String name;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private String location;
+        LocalDate startDate,
 
-    public CompetitionRequestDto(String name, LocalDate startDate, LocalDate endDate, String location) {
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.location = location;
-    }
-}
+        LocalDate endDate,
+
+        String location
+) {}
+
+
 
 

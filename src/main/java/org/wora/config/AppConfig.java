@@ -2,6 +2,7 @@ package org.wora.config;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -64,8 +65,15 @@ public class AppConfig {
         txManager.setEntityManagerFactory(entityManagerFactory);
         return txManager;
     }
+
     @Bean
     public ModelMapper modelMapper() {
-        return new ModelMapper();
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT)
+                .setPropertyCondition(context -> context.getSource() != null);
+        return modelMapper;
     }
+
+
 }

@@ -1,22 +1,22 @@
-package org.wora.service.impl;
-
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.wora.stage.StageRepository;
-import org.wora.stage.StageServiceImpl;
-
-import static org.mockito.ArgumentMatchers.any;
-
-@ExtendWith(MockitoExtension.class)
-class StageServiceImplTest {
-
-    @InjectMocks
-    private StageServiceImpl stageService;
-
-    @Mock
-    private StageRepository stageRepository;
+//package org.wora.service.impl;
+//
+//import org.junit.jupiter.api.extension.ExtendWith;
+//import org.mockito.InjectMocks;
+//import org.mockito.Mock;
+//import org.mockito.junit.jupiter.MockitoExtension;
+//import org.wora.stage.StageRepository;
+//import org.wora.stage.StageServiceImpl;
+//
+//import static org.mockito.ArgumentMatchers.any;
+//
+//@ExtendWith(MockitoExtension.class)
+//class StageServiceImplTest {
+//
+//    @InjectMocks
+//    private StageServiceImpl stageService;
+//
+//    @Mock
+//    private StageRepository stageRepository;
 
 //    @Test
 //    @DisplayName("Should return saved stage with result")
@@ -35,4 +35,4 @@ class StageServiceImplTest {
 //        assertEquals(LocalDate.of(2024, 12, 1), savedStage.getDate());
 //    }
 
-}
+//}

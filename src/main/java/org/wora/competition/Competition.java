@@ -7,16 +7,15 @@ import lombok.Setter;
 import org.wora.generalResult.GeneralResult;
 import org.wora.stage.Stage;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
-
-@NoArgsConstructor
 @Entity
-public class Competition {
+public class Competition implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,6 +30,7 @@ public class Competition {
 
     @OneToMany(mappedBy = "competition", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<GeneralResult> generalResults = new HashSet<>();
+    public Competition(){}
     public Competition(String name,LocalDate startDate,LocalDate endDate,String location){
     this.name=name;
     this.startDate=startDate;
