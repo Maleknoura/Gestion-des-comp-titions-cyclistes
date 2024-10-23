@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" build-on-make="true" name="CCH">
+    <output-path>$PROJECT_DIR$/.idea/artifacts</output-path>
+    <root id="root" />
+  </artifact>
+</component>

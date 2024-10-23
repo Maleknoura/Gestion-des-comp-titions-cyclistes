@@ -1,6 +1,8 @@
 package org.wora.config;
 
 import jakarta.persistence.EntityManagerFactory;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,9 +18,18 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "org.wora.repository")
+
+@EnableJpaRepositories(basePackages = {
+        "org.wora.competition",
+        "org.wora.cyclist",
+        "org.wora.team",
+        "org.wora.generalResult",
+        "org.wora.stageResult",
+        "org.wora.stage"
+
+})
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"org.wora.service", "org.wora.repository"})
+@ComponentScan(basePackages = "org.wora")
 public class AppConfig {
 
     @Bean
@@ -38,7 +49,7 @@ public class AppConfig {
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("org.wora.entity");
+        factory.setPackagesToScan("org.wora");
         factory.setDataSource(dataSource());
 
         Properties properties = new Properties();
@@ -54,4 +65,15 @@ public class AppConfig {
         txManager.setEntityManagerFactory(entityManagerFactory);
         return txManager;
     }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT)
+                .setPropertyCondition(context -> context.getSource() != null);
+        return modelMapper;
+    }
+
+
 }
