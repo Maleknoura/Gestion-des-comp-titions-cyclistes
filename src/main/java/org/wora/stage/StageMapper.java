@@ -14,8 +14,7 @@ import java.util.List;
 @Mapper
 public interface StageMapper {
     StageMapper INSTANCE = Mappers.getMapper(StageMapper.class);
-
-    @Mapping(target = "CompetitionName", source = "competition.name")
+    @Mapping(target = "competitionName", source = "competition.name")
     StageResponseDto toDto(Stage stage);
 
     Stage toEntity(StageRequestDto stageRequestDto);

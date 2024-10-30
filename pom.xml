@@ -56,7 +56,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.12</version> <!-- Ensure this matches your project requirements -->
+            <version>2.0.12</version>
         </dependency>
         <dependency>
             <groupId>jakarta.servlet.jsp.jstl</groupId>
@@ -69,6 +69,12 @@
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
             <version>3.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.el</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+
         <!-- Logback Classic -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -108,7 +114,12 @@
             <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.3.23</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -189,7 +200,7 @@
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.9.7</version> <!-- Vérifiez la dernière version sur Maven Central -->
+            <version>1.9.7</version>
         </dependency>
 
     </dependencies>

@@ -1,6 +1,7 @@
 package org.wora.stageResult;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 import org.wora.stageResult.dto.StageResultRequestDto;
@@ -11,6 +12,8 @@ import java.util.List;
 public interface StageResultMapper {
     StageResultMapper INSTANCE = Mappers.getMapper(StageResultMapper.class);
 
+    @Mapping(target = "stageId", source = "stage.id")
+    @Mapping(target = "cyclistId", source = "cyclist.id")
     StageResultResponseDto toDto(StageResult stageResult);
 
     StageResult toEntity(StageResultRequestDto stageRequestDto);
@@ -20,4 +23,5 @@ public interface StageResultMapper {
     List<StageResultResponseDto> toDtoList(List<StageResult> stageResults);
 
     List<StageResult> toEntityList(List<StageResultRequestDto> stageResultRequestDtos);
+
 }

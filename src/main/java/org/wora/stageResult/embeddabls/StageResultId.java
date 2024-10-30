@@ -19,4 +19,6 @@ public StageResultId(Long cyclistId,Long stageId){
  this.stageId=stageId;
  this.cyclistId=cyclistId;
 }
+
+
 }

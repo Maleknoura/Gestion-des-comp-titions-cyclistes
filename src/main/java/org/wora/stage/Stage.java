@@ -22,7 +22,7 @@ public class Stage {
     private double distance;
     private LocalDate date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "competition_id")
     private Competition competition;
 

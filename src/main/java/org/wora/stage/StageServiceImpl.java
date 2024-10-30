@@ -3,6 +3,7 @@ package org.wora.stage;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import org.wora.common.GenericService;
 import org.wora.competition.Competition;
 import org.wora.competition.CompetitionRepository;
@@ -13,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+@Validated
 @Service
 public class StageServiceImpl implements GenericService<StageRequestDto, StageResponseDto, Long> {
 

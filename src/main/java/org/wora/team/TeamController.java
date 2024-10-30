@@ -1,10 +1,14 @@
 package org.wora.team;
 
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.wora.team.dto.TeamRequestDto;
 import org.wora.team.dto.TeamResponseDto;
@@ -24,7 +28,7 @@ public class TeamController {
     }
 
     @PostMapping
-    public ResponseEntity<TeamResponseDto> createTeam(@RequestBody TeamRequestDto teamRequestDto) {
+    public ResponseEntity<TeamResponseDto> createTeam( @RequestBody @Valid TeamRequestDto teamRequestDto) {
         TeamResponseDto createdTeam = teamService.save(teamRequestDto);
         return new ResponseEntity<>(createdTeam, HttpStatus.CREATED);
     }
@@ -45,6 +49,7 @@ public class TeamController {
     @PutMapping("/{id}")
     public ResponseEntity<TeamResponseDto> updateTeam(
             @PathVariable Long id,
+            @Valid
             @RequestBody TeamRequestDto teamRequestDto) {
 
         TeamResponseDto updatedTeam = teamService.update(teamRequestDto, id);

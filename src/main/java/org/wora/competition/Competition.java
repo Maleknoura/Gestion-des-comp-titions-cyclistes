@@ -25,7 +25,7 @@ public class Competition implements Serializable {
     private LocalDate endDate;
     private String location;
 
-    @OneToMany(mappedBy = "competition", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "competition", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Stage> stages = new HashSet<>();
 
     @OneToMany(mappedBy = "competition", cascade = CascadeType.ALL, orphanRemoval = true)

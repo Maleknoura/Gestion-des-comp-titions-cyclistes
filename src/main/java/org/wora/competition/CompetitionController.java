@@ -1,5 +1,6 @@
 package org.wora.competition;
 
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.wora.competition.dto.CompetitionRequestDto;
 import org.wora.competition.dto.CompetitionResponseDto;
+import org.wora.generalResult.dto.GeneralResultResponseDto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,7 +28,7 @@ public class CompetitionController {
     }
 
     @PostMapping
-    public ResponseEntity<CompetitionResponseDto> createCompetition(@RequestBody CompetitionRequestDto competitionRequestDto) {
+    public ResponseEntity<CompetitionResponseDto> createCompetition(@RequestBody @Valid CompetitionRequestDto competitionRequestDto) {
         CompetitionResponseDto createdCompetition = competitionService.save(competitionRequestDto);
         return new ResponseEntity<>(createdCompetition, HttpStatus.CREATED);
     }
@@ -47,6 +49,7 @@ public class CompetitionController {
     @PutMapping("/{id}")
     public ResponseEntity<CompetitionResponseDto> updateCompetition(
             @PathVariable Long id,
+            @Valid
             @RequestBody CompetitionRequestDto competitionRequestDto) {
 
         CompetitionResponseDto updatedCompetition = competitionService.update(competitionRequestDto, id);
@@ -76,9 +79,9 @@ public class CompetitionController {
         return new ResponseEntity<>(competitions, HttpStatus.OK);
     }
 
-    // @GetMapping("/{competitionId}/rankings")
-    // public ResponseEntity<List<GeneralResultResponseDto>> getCyclistRankings(@PathVariable Long competitionId) {
-    //     List<GeneralResultResponseDto> rankings = competitionService.findCyclistRankings(competitionId);
-    //     return new ResponseEntity<>(rankings, HttpStatus.OK);
-    // }
+//     @GetMapping("/{competitionId}/rankings")
+//     public ResponseEntity<List<GeneralResultResponseDto>> getCyclistRankings(@PathVariable Long competitionId) {
+//         List<GeneralResultResponseDto> rankings = competitionService.findCyclistRankings(competitionId);
+//         return new ResponseEntity<>(rankings, HttpStatus.OK);
+//     }
 }
