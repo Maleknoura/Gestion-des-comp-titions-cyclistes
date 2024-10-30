@@ -3,6 +3,7 @@ package org.wora.stageResult;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import org.wora.common.GenericService;
 import org.wora.cyclist.Cyclist;
 import org.wora.cyclist.CyclistRepository;
@@ -17,6 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Validated
 public class StageResultServiceImpl implements GenericService<StageResultRequestDto, StageResultResponseDto, StageResultId> {
 
     @Autowired

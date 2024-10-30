@@ -5,5 +5,6 @@ import java.time.LocalDate;
 public record CyclistRequestDto(String firstName,
                                 String lastName,
                                 LocalDate dateOfBirth,
-                                String nationality) {
+                                String nationality
+                                                                ) {
 }

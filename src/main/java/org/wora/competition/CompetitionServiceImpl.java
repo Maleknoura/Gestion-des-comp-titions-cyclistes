@@ -3,6 +3,7 @@ package org.wora.competition;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import org.wora.competition.dto.CompetitionRequestDto;
 import org.wora.competition.dto.CompetitionResponseDto;
 import org.wora.generalResult.GeneralResult;
@@ -18,8 +19,10 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.wora.common.GenericService;
+import org.wora.generalResult.dto.GeneralResultResponseDto;
 
 @Service
+@Validated
 public class CompetitionServiceImpl implements GenericService<CompetitionRequestDto, CompetitionResponseDto, Long> {
 
     @Autowired

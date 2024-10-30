@@ -1,5 +1,6 @@
 package org.wora.stageResult;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class StageResultController {
     }
 
     @PostMapping
-    public ResponseEntity<StageResultResponseDto> createStageResult(@RequestBody StageResultRequestDto stageResultRequestDto) {
+    public ResponseEntity<StageResultResponseDto> createStageResult(@RequestBody @Valid StageResultRequestDto stageResultRequestDto) {
         StageResultResponseDto createdStageResult = stageResultService.save(stageResultRequestDto);
         return ResponseEntity.ok(createdStageResult);
     }

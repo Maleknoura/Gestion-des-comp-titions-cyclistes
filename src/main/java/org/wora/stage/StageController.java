@@ -2,6 +2,7 @@ package org.wora.stage;
 
 
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class StageController {
         this.stageService = stageService;
     }
     @PostMapping
-    public ResponseEntity<StageResponseDto> createStage(@RequestBody StageRequestDto stageRequestDto) {
+    public ResponseEntity<StageResponseDto> createStage(@RequestBody @Valid StageRequestDto stageRequestDto) {
         StageResponseDto createdStage = stageService.save(stageRequestDto);
         return new ResponseEntity<>(createdStage, HttpStatus.CREATED);
     }
@@ -46,7 +47,7 @@ public class StageController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StageResponseDto> updateStage(@PathVariable Long id, @RequestBody StageRequestDto stageRequestDto) {
+    public ResponseEntity<StageResponseDto> updateStage(@PathVariable @Valid Long id, @RequestBody StageRequestDto stageRequestDto) {
         StageResponseDto updatedStage = stageService.update(stageRequestDto, id);
         if (updatedStage != null) {
             return new ResponseEntity<>(updatedStage, HttpStatus.OK);
